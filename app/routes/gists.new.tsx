@@ -3,13 +3,6 @@ import { redirect } from "remix";
 import { Form, useTransition } from "remix";
 
 export let action: ActionFunction = async ({ request }) => {
-  // Very important or else it won't work :)
-  let token = "";
-  // in a real world scenario you'd want this token to be
-  // an enviornment variable on your server, but as long
-  // as you only use it in this action, it won't get
-  // included in the browser bundle.
-
   // get the form body out of the request using standard web
   // APIs on the server
   let body = new URLSearchParams(await request.text());
@@ -18,6 +11,12 @@ export let action: ActionFunction = async ({ request }) => {
   // named the same thing as the `<input/>` in the form.
   let fileName = body.get("fileName") || "";
   let content = body.get("content");
+  // Very important or else it won't work :)
+  let token = body.get("token");
+  // in a real world scenario you'd want this token to be
+  // an enviornment variable on your server, but as long
+  // as you only use it in this action, it won't get
+  // included in the browser bundle.
 
   // Hit the GitHub API to create a gist
   await fetch("https://api.github.com/gists", {
@@ -63,6 +62,13 @@ export default function NewGist() {
               Content:
               <br />
               <textarea required rows={10} name="content" />
+            </label>
+          </p>
+          <p>
+            <label>
+              Token:
+              <br />
+              <input required type="password" name="token" />
             </label>
           </p>
           <p>
