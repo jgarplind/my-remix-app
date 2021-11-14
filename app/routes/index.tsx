@@ -7,7 +7,7 @@ import stylesUrl from "../styles/index.css";
 export let meta: MetaFunction = () => {
   return {
     title: "Remix Starter",
-    description: "Welcome to remix!"
+    description: "Welcome to remix!",
   };
 };
 
@@ -32,6 +32,9 @@ export default function Index() {
       <p>
         <Link to="not-found">Link to 404 not found page.</Link> Clicking this
         link will land you in your root CatchBoundary component.
+      </p>
+      <p>
+        <Link to="/gists">Link to gists page</Link>
       </p>
     </div>
   );
